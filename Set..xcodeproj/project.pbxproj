@@ -13,6 +13,10 @@
 		DC5CCE5827BD33850030EDAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC5CCE5727BD33850030EDAC /* Assets.xcassets */; };
 		DC5CCE5B27BD33850030EDAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC5CCE5927BD33850030EDAC /* LaunchScreen.storyboard */; };
 		DC5CCE6327BD444C0030EDAC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5CCE6227BD444C0030EDAC /* CollectionViewCell.swift */; };
+		DC627DA027BD7850001E4AC2 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627D9F27BD7850001E4AC2 /* Card.swift */; };
+		DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA127BD7857001E4AC2 /* CardTheme.swift */; };
+		DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA327BD7866001E4AC2 /* SetModel.swift */; };
+		DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		DC5CCE5A27BD33850030EDAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC5CCE5C27BD33850030EDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC5CCE6227BD444C0030EDAC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		DC627D9F27BD7850001E4AC2 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		DC627DA127BD7857001E4AC2 /* CardTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTheme.swift; sourceTree = "<group>"; };
+		DC627DA327BD7866001E4AC2 /* SetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModel.swift; sourceTree = "<group>"; };
+		DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,8 @@
 		DC5CCE4D27BD33830030EDAC /* Set. */ = {
 			isa = PBXGroup;
 			children = (
+				DC627DA527BE1F29001E4AC2 /* ViewModel */,
+				DC627D9E27BD7445001E4AC2 /* Model */,
 				DC5CCE6427BD444F0030EDAC /* View */,
 				DC5CCE6627BD445C0030EDAC /* Supporting Files */,
 				DC5CCE5C27BD33850030EDAC /* Info.plist */,
@@ -89,6 +99,24 @@
 				DC5CCE5927BD33850030EDAC /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC627D9E27BD7445001E4AC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC627DA327BD7866001E4AC2 /* SetModel.swift */,
+				DC627D9F27BD7850001E4AC2 /* Card.swift */,
+				DC627DA127BD7857001E4AC2 /* CardTheme.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DC627DA527BE1F29001E4AC2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +191,10 @@
 			files = (
 				DC5CCE5327BD33830030EDAC /* SetViewController.swift in Sources */,
 				DC5CCE4F27BD33830030EDAC /* AppDelegate.swift in Sources */,
+				DC627DA027BD7850001E4AC2 /* Card.swift in Sources */,
+				DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */,
+				DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */,
+				DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */,
 				DC5CCE6327BD444C0030EDAC /* CollectionViewCell.swift in Sources */,
 				DC5CCE5127BD33830030EDAC /* SceneDelegate.swift in Sources */,
 			);
