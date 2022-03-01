@@ -59,43 +59,12 @@ class CardTheme {
         return NSAttributedString(string: withNumber, attributes: attributedString)
     }
     
-    static func setCard(card: Card, button: UIButton, isSelected: Bool, isSet: Bool) {
+    static func setCard(card: Card) -> NSAttributedString {
         let color = setColor(withCard: card)
         let symbol = setSymbol(withCard: card)
         let number = setNumber(withCard: card, withSymbol: symbol)
         let shading = setShading(withCard: card, withColor: color, withNumber: number)
-
-        button.setAttributedTitle(shading, for: .normal)
-
-        if isSelected {
-            button.layer.borderWidth = 3.0
-            button.layer.borderColor = UIColor.gray.cgColor
-            button.backgroundColor = .clear
-            
-            if isSet {
-                UIView.animate(withDuration: 0.8,
-                               delay: 0.3,
-                               options: [],
-                               animations: {
-                    button.layer.borderColor = UIColor.green.cgColor
-                    button.layer.borderWidth = 3.0
-                }, completion: nil)
-                
-                UIView.animate(withDuration: 1.0,
-                               delay: 0.1,
-                               options: [],
-                               animations: {
-                    button.setAttributedTitle(nil, for: .normal)
-                    button.backgroundColor = .black
-                    button.layer.borderColor = UIColor.clear.cgColor
-                    button.layer.borderWidth = 0.0
-                }, completion: nil)
-                
-            } else {
-                button.backgroundColor = .clear
-            }
-        } else {
-            button.backgroundColor = .gray
-        }
+        
+        return shading
     }
 }

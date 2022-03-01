@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class SetViewController: UIViewController, CollectionViewCellDelegate {
+    
+    private var subscriber = Set<AnyCancellable>()
     
     private var constraints: [NSLayoutConstraint] = []
     private var collectionView : UICollectionView?
@@ -92,51 +95,29 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
 
 extension SetViewController { //Private functions
     
-    func updateView() {
-        var cardIndex = 0
-        for card in viewModel.set.currentCards {
-            let button = self.button[cardIndex]
-            CardTheme.setCard(card: card,
-                              button: button,
-                              isSelected: viewModel.cardIsSelected(card: card),
-                              isSet: viewModel.isSet())
-            cardIndex += 1
-        }
-    }
-    
-    func firstUpdateView(index: Int, button: UIButton) {
-        CardTheme.setCard(card: viewModel.set.currentCards[index],
-                          button: button,
-                          isSelected: viewModel.cardIsSelected(card: viewModel.set.currentCards[index]),
-                          isSet: viewModel.isSet())
+    private func bindingScore() {
+        viewModel.$score
+            .sink { [weak self] score in
+                self?.scoreTitle.text = String(describing: score)
+            }
+            .store(in: &subscriber)
     }
     
     @objc private func newGame() {
         viewModel.newGame()
-        scoreTitle.text = "\(viewModel.score)"
-        for index in 0..<button.count {
-            button[index].setAttributedTitle(nil, for: .normal)
-            if index < 4 || index > 15 { button[index].isHidden = true; button[index].isEnabled = false }
-        }
-        updateView()
+        bindingScore()
+        collectionView?.reloadData()
     }
     
     @objc private func addThreeCard() {
-        var addition = 0
-        for index in 0..<button.count {
-            if button[index].isHidden == true {
-                button[index].isHidden = false
-                button[index].isEnabled = true
-                addition += 1
-            }
-            if addition == 3 { return }
-        }
+        viewModel.addThreeCard()
+        collectionView?.reloadData()
     }
     
-    func onCardButton(sender: UIButton, index: Int) {
-        scoreTitle.text = "\(viewModel.score)"
-        viewModel.select(card: viewModel.set.currentCards[index])
-        updateView()
+    func onCardButton(index: Int) {
+        viewModel.select(at: index)
+        bindingScore()
+        collectionView?.reloadData()
     }
     
     private func configureStackViews() {
@@ -210,12 +191,15 @@ extension SetViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CollectionViewCell.self), for: indexPath) as? CollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CollectionViewCell.self),
+                                                            for: indexPath) as? CollectionViewCell
         else { return UICollectionViewCell.init() }
         
         cell.configure(delegate: self,
-                       at: indexPath.row)
-        self.button.append(cell.button)
+                       cardInfo: viewModel.cardInfoList[indexPath.row],
+                       isSet: viewModel.isSet(),
+                       isSelected: viewModel.cardIsSelected(card: viewModel.set.currentCards[indexPath.row]))
+     
         return cell
     }
 }

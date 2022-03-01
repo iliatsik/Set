@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import Combine
 
 protocol CollectionViewCellDelegate: AnyObject {
-    func onCardButton(sender: UIButton, index: Int)
-    func firstUpdateView(index: Int, button: UIButton)
+    func onCardButton(index: Int)
 }
 
 class CollectionViewCell: UICollectionViewCell {
@@ -41,16 +41,48 @@ class CollectionViewCell: UICollectionViewCell {
         button.frame = contentView.bounds
     }
     
-    func configure(delegate: CollectionViewCellDelegate, at index: Int) {
+    func configure(delegate: CollectionViewCellDelegate, cardInfo: CardInfo, isSet: Bool, isSelected: Bool) {
         self.delegate = delegate
-        button.tag = index
+        button.tag = cardInfo.index
+        button.isHidden = cardInfo.isHidden
+        button.isEnabled = cardInfo.isEnabled
+        button.setAttributedTitle(cardInfo.title, for: .normal)
+        button.backgroundColor = .gray
         button.addTarget(self, action: #selector(onCardButton(sender:)), for: .touchUpInside)
         
-        if button.tag < 4 || button.tag > 15 { button.isHidden = true; button.isEnabled = false }
-        self.delegate?.firstUpdateView(index: button.tag, button: button)
+        if isSelected {
+             button.layer.borderWidth = 3.0
+             button.layer.borderColor = UIColor.gray.cgColor
+             button.backgroundColor = .clear
+ 
+             if isSet {
+                 UIView.animate(withDuration: 0.8,
+                                delay: 0.3,
+                                options: [],
+                                animations: {
+                     self.button.layer.borderColor = UIColor.green.cgColor
+                     self.button.layer.borderWidth = 3.0
+                 }, completion: nil)
+ 
+                 UIView.animate(withDuration: 1.0,
+                                delay: 0.1,
+                                options: [],
+                                animations: {
+                     self.button.setAttributedTitle(nil, for: .normal)
+                     self.button.backgroundColor = .black
+                     self.button.layer.borderColor = UIColor.clear.cgColor
+                     self.button.layer.borderWidth = 0.0
+                 }, completion: nil)
+ 
+             } else {
+                 self.button.backgroundColor = .clear
+             }
+         } else {
+             self.button.backgroundColor = .gray
+         }
     }
     
     @objc private func onCardButton(sender: UIButton) {
-        delegate?.onCardButton(sender: sender, index: sender.tag)
+        delegate?.onCardButton(index: sender.tag)
     }
 }

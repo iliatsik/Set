@@ -6,21 +6,44 @@
 //
 
 import Foundation
+import Combine
+
+struct CardInfo {
+    var index = Int()
+    var title = NSAttributedString()
+    var isHidden = Bool()
+    var isEnabled = Bool()
+}
 
 class SetViewModel {
-    
+    private var cancellable = Set<AnyCancellable>()
+
     var set = SetModel()
-    var score = 0
+    @Published var score = 0
     
-    
+    var cardInfoList: [CardInfo] = []
+        
     func newGame() {
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()
         set.selectedCards.removeAll()
-        
+        cardInfoList.removeAll()
         generateAllCardCombinations()
         addCards(numberOfCardsToSelect: 24)
+        firstUpdateCardModel()
+    }
+    
+    func addThreeCard() {
+        var addition = 0
+        for index in 0..<cardInfoList.count {
+            if cardInfoList[index].isHidden == true {
+                cardInfoList[index].isHidden = false
+                cardInfoList[index].isEnabled = true
+                addition += 1
+            }
+            if addition == 3 { return }
+        }
     }
     
     private func generateAllCardCombinations() {
@@ -33,6 +56,16 @@ class SetViewModel {
                     }
                 }
             }
+        }
+    }
+    
+    func firstUpdateCardModel() {
+        for index in 0..<24 {
+            cardInfoList.append(.init(index: index,
+                                      title: CardTheme.setCard(card: set.currentCards[index]),
+                                      isHidden: true,
+                                      isEnabled: false))
+            if index > 3 && index < 16 { cardInfoList[index].isHidden = false; cardInfoList[index].isEnabled = true }
         }
     }
     
@@ -98,7 +131,9 @@ class SetViewModel {
         return true
     }
     
-    func select(card: Card) {
+    func select(at index: Int) {
+        let card = set.currentCards[index]
+        
         if set.selectedCards.count == 3 && isSet() {
             set.selectedCards.forEach {
                 if let selectedCardInGameIndex = set.currentCards.firstIndex(of: $0) {
@@ -109,11 +144,11 @@ class SetViewModel {
                     }
                 }
             }
-            set.selectedCards.removeAll()
             score += 3
-        } else if set.selectedCards.count == 3 && !isSet() {
             set.selectedCards.removeAll()
+        } else if set.selectedCards.count == 3 && !isSet() {
             score -= 1
+            set.selectedCards.removeAll()
         }
         
         if let cardToSelect = set.selectedCards.firstIndex(of: card) {
