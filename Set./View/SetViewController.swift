@@ -162,24 +162,23 @@ extension SetViewController { //Private functions
         constraints.append(contentsOf: [
             
             labelStackView.topAnchor.constraint(equalTo: view.topAnchor,
-                                                constant: view.safeAreaInsets.top * 1.5),
+                                                constant: view.safeAreaInsets.top),
             labelStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             /* For Collection view, we are using center x, which is defined as the view's center X,
              center y as view's center y with constant: view's top safe area multiplied by two, height is defined as 65/100 of the view's height, width as the view's height with constant: view's top safe area */
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
-                                                    constant: -view.safeAreaInsets.top),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             collectionView.widthAnchor.constraint(equalTo: view.widthAnchor,
                                                   constant: -(view.safeAreaInsets.top)),
+            collectionView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor),
             
             /* For labelStackView, top anchor is connected with Collection View's bottom anchor,
              width is equal to the Collection View, center X is defined as view's center X */
-            buttonStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor,
-                                                 constant: view.safeAreaInsets.top),
-            buttonStackView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
             buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.safeAreaInsets.bottom),
+            buttonStackView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
         ])
     }
 }

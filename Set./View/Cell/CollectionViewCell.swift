@@ -21,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
-        button.titleLabel?.font = .boldSystemFont(ofSize: 32)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 31)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.numberOfLines = 0
         return button
