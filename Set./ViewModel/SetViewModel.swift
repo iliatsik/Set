@@ -16,19 +16,16 @@ struct CardInfo {
 }
 
 class SetViewModel {
-    private var cancellable = Set<AnyCancellable>()
-
     var set = SetModel()
     @Published var score = 0
     
-    var cardInfoList: [CardInfo] = []
-        
+    var cardInfoList = [CardInfo](repeating: .init() , count: 24)
+    
     func newGame() {
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()
         set.selectedCards.removeAll()
-        cardInfoList.removeAll()
         generateAllCardCombinations()
         addCards(numberOfCardsToSelect: 24)
         firstUpdateCardModel()
@@ -61,11 +58,18 @@ class SetViewModel {
     
     func firstUpdateCardModel() {
         for index in 0..<24 {
-            cardInfoList.append(.init(index: index,
-                                      title: CardTheme.setCard(card: set.currentCards[index]),
-                                      isHidden: true,
-                                      isEnabled: false))
-            if index > 3 && index < 16 { cardInfoList[index].isHidden = false; cardInfoList[index].isEnabled = true }
+                cardInfoList[index].index = index
+                cardInfoList[index].title = CardTheme.setCard(card: set.currentCards[index])
+                cardInfoList[index].isHidden = (index > 3 && index < 16) ? false : true
+                cardInfoList[index].isEnabled = (index > 3 && index < 16) ? true : false
+        }
+    }
+    
+    
+    func updateCardModel() {
+        for index in 0..<24 {
+                cardInfoList[index].index = index
+                cardInfoList[index].title = CardTheme.setCard(card: set.currentCards[index])
         }
     }
     
@@ -144,6 +148,7 @@ class SetViewModel {
                     }
                 }
             }
+            updateCardModel()
             score += 3
             set.selectedCards.removeAll()
         } else if set.selectedCards.count == 3 && !isSet() {
