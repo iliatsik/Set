@@ -56,7 +56,7 @@ class SetViewModel {
         }
     }
     
-    func firstUpdateCardModel() {
+    private func firstUpdateCardModel() {
         for index in 0..<24 {
                 cardInfoList[index].index = index
                 cardInfoList[index].title = CardTheme.setCard(card: set.currentCards[index])
@@ -66,7 +66,7 @@ class SetViewModel {
     }
     
     
-    func updateCardModel() {
+    private func updateCardModel() {
         for index in 0..<24 {
                 cardInfoList[index].index = index
                 cardInfoList[index].title = CardTheme.setCard(card: set.currentCards[index])
