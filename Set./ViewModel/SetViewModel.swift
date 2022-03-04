@@ -43,6 +43,10 @@ class SetViewModel {
         }
     }
     
+    func isSelected(at index: Int) -> Bool {
+        return cardIsSelected(card: set.currentCards[index])
+    }
+    
     private func generateAllCardCombinations() {
         for color in Card.Color.allCases {
             for symbol in Card.Symbol.allCases {

@@ -197,7 +197,7 @@ extension SetViewController: UICollectionViewDataSource {
         cell.configure(delegate: self,
                        cardInfo: viewModel.cardInfoList[indexPath.row],
                        isSet: viewModel.isSet(),
-                       isSelected: viewModel.cardIsSelected(card: viewModel.set.currentCards[indexPath.row]))
+                       isSelected: viewModel.isSelected(at: indexPath.row))
      
         return cell
     }
