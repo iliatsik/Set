@@ -56,23 +56,10 @@ class CollectionViewCell: UICollectionViewCell {
              button.backgroundColor = .clear
  
              if isSet {
-                 UIView.animate(withDuration: 0.8,
-                                delay: 0.3,
-                                options: [],
-                                animations: {
-                     self.button.layer.borderColor = UIColor.green.cgColor
-                     self.button.layer.borderWidth = 3.0
-                 }, completion: nil)
- 
-                 UIView.animate(withDuration: 1.0,
-                                delay: 0.1,
-                                options: [],
-                                animations: {
                      self.button.setAttributedTitle(nil, for: .normal)
                      self.button.backgroundColor = .black
                      self.button.layer.borderColor = UIColor.clear.cgColor
                      self.button.layer.borderWidth = 0.0
-                 }, completion: nil)
  
              } else {
                  self.button.backgroundColor = .clear

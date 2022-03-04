@@ -20,6 +20,7 @@ class SetViewModel {
     @Published var score = 0
     
     var cardInfoList = [CardInfo](repeating: .init() , count: 24)
+    var setChecker = false
     
     func newGame() {
         score = 0
@@ -142,6 +143,13 @@ class SetViewModel {
     func select(at index: Int) {
         let card = set.currentCards[index]
         
+        if let cardToSelect = set.selectedCards.firstIndex(of: card) {
+            // Card is already selected, so we are removing it from the selection
+            set.selectedCards.remove(at: cardToSelect)
+        } else {
+            set.selectedCards.append(card)
+        }
+        
         if set.selectedCards.count == 3 && isSet() {
             set.selectedCards.forEach {
                 if let selectedCardInGameIndex = set.currentCards.firstIndex(of: $0) {
@@ -154,17 +162,12 @@ class SetViewModel {
             }
             updateCardModel()
             score += 3
+            setChecker = true
             set.selectedCards.removeAll()
         } else if set.selectedCards.count == 3 && !isSet() {
             score -= 1
+            setChecker = false
             set.selectedCards.removeAll()
-        }
-        
-        if let cardToSelect = set.selectedCards.firstIndex(of: card) {
-            // Card is already selected, so we are removing it from the selection
-            set.selectedCards.remove(at: cardToSelect)
-        } else {
-            set.selectedCards.append(card)
         }
     }
 }

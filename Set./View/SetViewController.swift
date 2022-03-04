@@ -117,6 +117,7 @@ extension SetViewController { //Private functions
     func onCardButton(index: Int) {
         viewModel.select(at: index)
         bindingScore()
+        viewColor(for: viewModel.setChecker, selectedCard: viewModel.set.selectedCards.count)
         collectionView?.reloadData()
     }
     
@@ -180,6 +181,42 @@ extension SetViewController { //Private functions
             buttonStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.safeAreaInsets.bottom),
             buttonStackView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
         ])
+    }
+    
+    private func viewColor(for set: Bool, selectedCard: Int) {
+        if set == true && selectedCard == 0 {
+            UIView.animate(withDuration: 0.8,
+                           delay: 0.3,
+                           options: [],
+                           animations: {
+                self.view.backgroundColor = .systemGreen
+                self.collectionView?.backgroundColor = .systemGreen
+            }, completion: nil)
+            UIView.animate(withDuration: 0.8,
+                           delay: 0.3,
+                           options: [],
+                           animations: {
+                self.view.backgroundColor = .black
+                self.collectionView?.backgroundColor = .black
+            }, completion: nil)
+        }
+        
+        if set == false && selectedCard == 0 {
+                UIView.animate(withDuration: 0.8,
+                               delay: 0.3,
+                               options: [],
+                               animations: {
+                    self.view.backgroundColor = .systemRed
+                    self.collectionView?.backgroundColor = .systemRed
+                }, completion: nil)
+                UIView.animate(withDuration: 0.8,
+                               delay: 0.3,
+                               options: [],
+                               animations: {
+                    self.view.backgroundColor = .black
+                    self.collectionView?.backgroundColor = .black
+                }, completion: nil)
+        }
     }
 }
 
