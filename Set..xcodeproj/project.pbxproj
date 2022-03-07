@@ -17,6 +17,7 @@
 		DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA127BD7857001E4AC2 /* CardTheme.swift */; };
 		DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA327BD7866001E4AC2 /* SetModel.swift */; };
 		DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */; };
+		DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		DC627DA127BD7857001E4AC2 /* CardTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTheme.swift; sourceTree = "<group>"; };
 		DC627DA327BD7866001E4AC2 /* SetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModel.swift; sourceTree = "<group>"; };
 		DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
+		DC627E0327D5F240001E4AC2 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				DC5CCE6427BD444F0030EDAC /* View */,
 				DC5CCE6627BD445C0030EDAC /* Supporting Files */,
 				DC5CCE5C27BD33850030EDAC /* Info.plist */,
+				DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */,
 			);
 			path = Set.;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				DC5CCE4F27BD33830030EDAC /* AppDelegate.swift in Sources */,
 				DC627DA027BD7850001E4AC2 /* Card.swift in Sources */,
 				DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */,
+				DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */,
 				DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */,
 				DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */,
 				DC5CCE6327BD444C0030EDAC /* CollectionViewCell.swift in Sources */,
@@ -404,6 +408,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DC627E0327D5F240001E4AC2 /* Data.xcdatamodel */,
+			);
+			currentVersion = DC627E0327D5F240001E4AC2 /* Data.xcdatamodel */;
+			path = Data.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DC5CCE4327BD33830030EDAC /* Project object */;
 }
