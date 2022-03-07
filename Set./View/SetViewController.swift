@@ -117,8 +117,11 @@ extension SetViewController { //Private functions
     func onCardButton(index: Int) {
         viewModel.select(at: index)
         bindingScore()
-        viewColor(for: viewModel.setChecker, selectedCard: viewModel.set.selectedCards.count)
         collectionView?.reloadData()
+        viewColor(for: viewModel.setChecker,
+                  selectedTwice: viewModel.selectedTwice,
+                  selectedCard: viewModel.set.selectedCards.count)
+
     }
     
     private func configureStackViews() {
@@ -183,8 +186,8 @@ extension SetViewController { //Private functions
         ])
     }
     
-    private func viewColor(for set: Bool, selectedCard: Int) {
-        if set == true && selectedCard == 0 {
+    private func viewColor(for set: Bool,selectedTwice: Bool, selectedCard: Int) {
+        if set == true && selectedTwice == true && selectedCard == 0 {
             UIView.animate(withDuration: 0.8,
                            delay: 0.3,
                            options: [],
@@ -201,7 +204,7 @@ extension SetViewController { //Private functions
             }, completion: nil)
         }
         
-        if set == false && selectedCard == 0 {
+        if set == false && selectedTwice == true && selectedCard == 0 {
                 UIView.animate(withDuration: 0.8,
                                delay: 0.3,
                                options: [],

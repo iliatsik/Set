@@ -21,6 +21,7 @@ class SetViewModel {
     
     var cardInfoList = [CardInfo](repeating: .init() , count: 24)
     var setChecker = false
+    var selectedTwice = false
     
     func newGame() {
         score = 0
@@ -145,8 +146,10 @@ class SetViewModel {
         
         if let cardToSelect = set.selectedCards.firstIndex(of: card) {
             // Card is already selected, so we are removing it from the selection
+            selectedTwice = false
             set.selectedCards.remove(at: cardToSelect)
         } else {
+            selectedTwice = true
             set.selectedCards.append(card)
         }
         
