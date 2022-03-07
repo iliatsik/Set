@@ -19,13 +19,23 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
     private let viewModel = SetViewModel()
     private var button = [UIButton]()
     
+    private var scoreController: UIButton {
+        let button = UIButton()
+        let boldConfig = UIImage.SymbolConfiguration(scale: .large)
+        let boldList = UIImage(systemName: "list.bullet", withConfiguration: boldConfig)
+        button.setImage(boldList, for: .normal)
+        button.tintColor = .lightGray
+        button.contentHorizontalAlignment = .right
+        return button
+    }
+    
     private var scoreTitle: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.layer.masksToBounds = true
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 25)
-        label.textColor = .white
+        label.textColor = .lightGray
         label.text = "0"
         return label
     }()
@@ -128,7 +138,9 @@ extension SetViewController { //Private functions
         [self.addThreeCardTitle,
          self.newGameTitle].forEach { buttonStackView.addArrangedSubview($0)}
         
-        [self.scoreTitle].forEach { labelStackView.addArrangedSubview($0) }
+        [.init(),
+         self.scoreTitle,
+         self.scoreController].forEach { labelStackView.addArrangedSubview($0) }
     }
     
     private func configureCollectionView() {
@@ -168,7 +180,7 @@ extension SetViewController { //Private functions
             labelStackView.topAnchor.constraint(equalTo: view.topAnchor,
                                                 constant: view.safeAreaInsets.top),
             labelStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
+            labelStackView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
             /* For Collection view, we are using center x, which is defined as the view's center X,
              center y as view's center y with constant: view's top safe area multiplied by two, height is defined as 65/100 of the view's height, width as the view's height with constant: view's top safe area */
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

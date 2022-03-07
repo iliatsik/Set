@@ -66,9 +66,7 @@
 		DC5CCE4D27BD33830030EDAC /* Set. */ = {
 			isa = PBXGroup;
 			children = (
-				DC627DA527BE1F29001E4AC2 /* ViewModel */,
-				DC627D9E27BD7445001E4AC2 /* Model */,
-				DC5CCE6427BD444F0030EDAC /* View */,
+				DC627E0527D5F2F1001E4AC2 /* Presentation */,
 				DC5CCE6627BD445C0030EDAC /* Supporting Files */,
 				DC5CCE5C27BD33850030EDAC /* Info.plist */,
 				DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */,
@@ -120,6 +118,40 @@
 				DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DC627E0527D5F2F1001E4AC2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E0727D5F309001E4AC2 /* Score */,
+				DC627E0627D5F2F9001E4AC2 /* Set */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		DC627E0627D5F2F9001E4AC2 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				DC627DA527BE1F29001E4AC2 /* ViewModel */,
+				DC627D9E27BD7445001E4AC2 /* Model */,
+				DC5CCE6427BD444F0030EDAC /* View */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		DC627E0727D5F309001E4AC2 /* Score */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E0827D5F30E001E4AC2 /* View */,
+			);
+			path = Score;
+			sourceTree = "<group>";
+		};
+		DC627E0827D5F30E001E4AC2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
