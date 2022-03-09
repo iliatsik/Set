@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class SetViewController: UIViewController, CollectionViewCellDelegate {
     
@@ -17,8 +18,7 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
     private let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
     private let viewModel = SetViewModel()
-    private var button = [UIButton]()
-    
+        
     private var scoreController: UIButton {
         let button = UIButton()
         let boldConfig = UIImage.SymbolConfiguration(scale: .large)
@@ -26,6 +26,7 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
         button.setImage(boldList, for: .normal)
         button.tintColor = .lightGray
         button.contentHorizontalAlignment = .right
+        button.addTarget(self, action: #selector(pushForScore), for: .touchUpInside)
         return button
     }
     
@@ -39,6 +40,7 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
         label.text = "0"
         return label
     }()
+    
     private var addThreeCardTitle: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray
@@ -131,7 +133,14 @@ extension SetViewController { //Private functions
         viewColor(for: viewModel.setChecker,
                   selectedTwice: viewModel.selectedTwice,
                   selectedCard: viewModel.set.selectedCards.count)
-
+    }
+    
+    @objc private func pushForScore() {
+        let scoreViewController = ScoreViewController()
+        guard let score = scoreTitle.text else { return }
+        guard let integerScore = Int16(score) else { return }
+        scoreViewController.save(currScore: integerScore, currdate: Date().format())
+        self.present(scoreViewController, animated: true, completion: nil)
     }
     
     private func configureStackViews() {

@@ -20,7 +20,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         let vc = SetViewController()
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
-        self.window?.backgroundColor = .red
+        self.window?.backgroundColor = .black
         
         return true
     }

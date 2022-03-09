@@ -18,6 +18,10 @@
 		DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA327BD7866001E4AC2 /* SetModel.swift */; };
 		DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */; };
 		DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */; };
+		DC627E0B27D607CE001E4AC2 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */; };
+		DC627E0E27D61EFB001E4AC2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */; };
+		DC627E1F27D88AF3001E4AC2 /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E1D27D88AF3001E4AC2 /* Score+CoreDataClass.swift */; };
+		DC627E2027D88AF3001E4AC2 /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E1E27D88AF3001E4AC2 /* Score+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		DC627DA327BD7866001E4AC2 /* SetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModel.swift; sourceTree = "<group>"; };
 		DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
 		DC627E0327D5F240001E4AC2 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
+		DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		DC627E1D27D88AF3001E4AC2 /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DC627E1E27D88AF3001E4AC2 /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,7 @@
 		DC5CCE4D27BD33830030EDAC /* Set. */ = {
 			isa = PBXGroup;
 			children = (
+				DC627E1427D63454001E4AC2 /* Infrastructure */,
 				DC627E0527D5F2F1001E4AC2 /* Presentation */,
 				DC5CCE6627BD445C0030EDAC /* Supporting Files */,
 				DC5CCE5C27BD33850030EDAC /* Info.plist */,
@@ -150,8 +159,35 @@
 		DC627E0827D5F30E001E4AC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DC627E0C27D61EEA001E4AC2 /* Cell */,
+				DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DC627E0C27D61EEA001E4AC2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC627E1327D63446001E4AC2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E1D27D88AF3001E4AC2 /* Score+CoreDataClass.swift */,
+				DC627E1E27D88AF3001E4AC2 /* Score+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DC627E1427D63454001E4AC2 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E1327D63446001E4AC2 /* CoreData */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,13 +260,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC627E1F27D88AF3001E4AC2 /* Score+CoreDataClass.swift in Sources */,
 				DC5CCE5327BD33830030EDAC /* SetViewController.swift in Sources */,
 				DC5CCE4F27BD33830030EDAC /* AppDelegate.swift in Sources */,
 				DC627DA027BD7850001E4AC2 /* Card.swift in Sources */,
 				DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */,
 				DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */,
+				DC627E0E27D61EFB001E4AC2 /* TableViewCell.swift in Sources */,
+				DC627E2027D88AF3001E4AC2 /* Score+CoreDataProperties.swift in Sources */,
 				DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */,
 				DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */,
+				DC627E0B27D607CE001E4AC2 /* ScoreViewController.swift in Sources */,
 				DC5CCE6327BD444C0030EDAC /* CollectionViewCell.swift in Sources */,
 				DC5CCE5127BD33830030EDAC /* SceneDelegate.swift in Sources */,
 			);
