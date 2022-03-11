@@ -18,12 +18,14 @@ struct CardInfo {
 class SetViewModel {
     var set = SetModel()
     @Published var score = 0
-    
+    var manager = ScoreStorageManager()
+
     var cardInfoList = [CardInfo](repeating: .init() , count: 24)
     var setChecker = false
     var selectedTwice = false
-    
+
     func newGame() {
+        configureCoreData()
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()
@@ -43,6 +45,16 @@ class SetViewModel {
             }
             if addition == 3 { return }
         }
+    }
+    
+    func configureCoreData() {
+        manager.insert(currentScore: Int16(score),
+                       date: Date().format())
+    }
+    
+    func updateCoreData() {
+        manager.updateLoan(currentScore: Int16(score),
+                           date: Date().format())
     }
     
     func isSelected(at index: Int) -> Bool {

@@ -137,9 +137,7 @@ extension SetViewController { //Private functions
     
     @objc private func pushForScore() {
         let scoreViewController = ScoreViewController()
-        guard let score = scoreTitle.text else { return }
-        guard let integerScore = Int16(score) else { return }
-        scoreViewController.save(currScore: integerScore, currdate: Date().format())
+        viewModel.updateCoreData()
         self.present(scoreViewController, animated: true, completion: nil)
     }
     
