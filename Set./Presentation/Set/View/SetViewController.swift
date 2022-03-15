@@ -135,9 +135,11 @@ extension SetViewController { //Private functions
                   selectedCard: viewModel.set.selectedCards.count)
     }
     
-    @objc private func pushForScore() {
+    @objc private func pushForScore(at index: Int) {
         let scoreViewController = ScoreViewController()
-        viewModel.updateCoreData()
+        guard let currentScores = viewModel.scores else { return }
+        scoreViewController.scores = currentScores
+        viewModel.updateObject(at: scoreController.tag)
         self.present(scoreViewController, animated: true, completion: nil)
     }
     

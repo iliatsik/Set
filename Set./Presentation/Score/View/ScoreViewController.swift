@@ -10,7 +10,7 @@ import CoreData
 
 class ScoreViewController: UIViewController {
 
-    private var manager = ScoreStorageManager()
+    var scores: [Score]?
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -32,17 +32,21 @@ class ScoreViewController: UIViewController {
     }
 }
 
+//MARK: - Table View
 extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manager.fetchData().count
+        guard let scores = scores else { return 0 }
+        return scores.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TableViewCell.self),
                                                        for: indexPath) as? TableViewCell else { return UITableViewCell.init() }
-        guard let date = manager.fetchData()[indexPath.row].date else { return UITableViewCell.init() }
         
-        cell.configure(scoreTitle: "Score: \(manager.fetchData()[indexPath.row].score)",
+        guard let currentScore = scores?[indexPath.row] else { return UITableViewCell.init() }
+        guard let date = currentScore.date else { return UITableViewCell.init() }
+        
+        cell.configure(scoreTitle: "Score: \(currentScore.score)",
                        dateTitle: date)
         return cell
     }

@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import UIKit
+import CoreData
 
 struct CardInfo {
     var index = Int()
@@ -18,14 +20,57 @@ struct CardInfo {
 class SetViewModel {
     var set = SetModel()
     @Published var score = 0
-    var manager = ScoreStorageManager()
 
     var cardInfoList = [CardInfo](repeating: .init() , count: 24)
     var setChecker = false
     var selectedTwice = false
-
+    
+    var scores: [Score]?
+    let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    
+    func fetchScore() {
+        do {
+            self.scores = try context?.fetch(Score.fetchRequest())
+            //reload data of table view
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func createNewObject(with score: Int16) {
+        guard let context = self.context else { return }
+        let newScore = Score(context: context)
+        newScore.score = score
+        newScore.date = Date().format()
+        
+        do {
+            try self.context?.save()
+        }
+        catch {
+            print(error)
+        }
+        
+        fetchScore()
+    }
+    
+    func updateObject(at index: Int) {
+        guard let scores = scores else { return }
+        scores[index].score = Int16(score)
+        scores[index].date = Date().format()
+        
+        do {
+            try self.context?.save()
+        }
+        catch {
+            print(error)
+        }
+        
+        fetchScore()
+    }
+    
     func newGame() {
-        configureCoreData()
+        createNewObject(with: Int16(score) )
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()
@@ -45,16 +90,6 @@ class SetViewModel {
             }
             if addition == 3 { return }
         }
-    }
-    
-    func configureCoreData() {
-        manager.insert(currentScore: Int16(score),
-                       date: Date().format())
-    }
-    
-    func updateCoreData() {
-        manager.updateLoan(currentScore: Int16(score),
-                           date: Date().format())
     }
     
     func isSelected(at index: Int) -> Bool {
