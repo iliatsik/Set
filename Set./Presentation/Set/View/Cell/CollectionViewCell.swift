@@ -41,7 +41,7 @@ class CollectionViewCell: UICollectionViewCell {
         button.frame = contentView.bounds
     }
     
-    func configure(delegate: CollectionViewCellDelegate, cardInfo: CardInfo, isSet: Bool, isSelected: Bool) {
+    func configure(delegate: CollectionViewCellDelegate, cardInfo: CardInfo, isSet: Bool, isSelected: Bool) {        
         self.delegate = delegate
         button.tag = cardInfo.index
         button.isHidden = cardInfo.isHidden

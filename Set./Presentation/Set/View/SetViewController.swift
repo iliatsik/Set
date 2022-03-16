@@ -16,8 +16,8 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
     private var constraints: [NSLayoutConstraint] = []
     private var collectionView : UICollectionView?
     private let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    
-    private let viewModel = SetViewModel()
+        
+    private let viewModel = SetViewModel(coreDataManager: CoreDataManager.shared )
         
     private var scoreController: UIButton {
         let button = UIButton()
@@ -135,11 +135,8 @@ extension SetViewController { //Private functions
                   selectedCard: viewModel.set.selectedCards.count)
     }
     
-    @objc private func pushForScore(at index: Int) {
-        let scoreViewController = ScoreViewController()
-        guard let currentScores = viewModel.scores else { return }
-        scoreViewController.scores = currentScores
-        viewModel.updateObject(at: scoreController.tag)
+    @objc private func pushForScore(_ sender: UIButton) {
+        let scoreViewController = ScoreViewController(coreDataManager: CoreDataManager.shared, at: sender.tag, with: Int16(viewModel.score))
         self.present(scoreViewController, animated: true, completion: nil)
     }
     

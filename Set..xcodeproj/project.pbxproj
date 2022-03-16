@@ -23,6 +23,7 @@
 		DC627E2927DB536B001E4AC2 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2827DB536B001E4AC2 /* Date+String.swift */; };
 		DC627E2E27E0A1F5001E4AC2 /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */; };
 		DC627E2F27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */; };
+		DC627E3627E1CF18001E4AC2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +43,9 @@
 		DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DC627E2827DB536B001E4AC2 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
-		DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Score+CoreDataClass.swift"; path = "../../../Score+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Score+CoreDataProperties.swift"; path = "../../../Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +180,8 @@
 		DC627E1327D63446001E4AC2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */,
-				DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */,
+				DC627E3827E1CF26001E4AC2 /* Properties */,
+				DC627E3727E1CF1F001E4AC2 /* Manager */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -199,6 +201,23 @@
 				DC627E2827DB536B001E4AC2 /* Date+String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DC627E3727E1CF1F001E4AC2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		DC627E3827E1CF26001E4AC2 /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */,
+				DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */,
+			);
+			path = Properties;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +293,7 @@
 				DC627E2F27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift in Sources */,
 				DC5CCE5327BD33830030EDAC /* SetViewController.swift in Sources */,
 				DC5CCE4F27BD33830030EDAC /* AppDelegate.swift in Sources */,
+				DC627E3627E1CF18001E4AC2 /* CoreDataManager.swift in Sources */,
 				DC627E2E27E0A1F5001E4AC2 /* Score+CoreDataClass.swift in Sources */,
 				DC627DA027BD7850001E4AC2 /* Card.swift in Sources */,
 				DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */,

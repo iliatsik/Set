@@ -18,59 +18,22 @@ struct CardInfo {
 }
 
 class SetViewModel {
+    
+    init(coreDataManager: CoreDataManager) {
+        self.coreDataManager = coreDataManager
+    }
+    
     var set = SetModel()
     @Published var score = 0
 
     var cardInfoList = [CardInfo](repeating: .init() , count: 24)
     var setChecker = false
     var selectedTwice = false
-    
-    var scores: [Score]?
-    let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-    
-    func fetchScore() {
-        do {
-            self.scores = try context?.fetch(Score.fetchRequest())
-            //reload data of table view
-        }
-        catch {
-            print(error)
-        }
-    }
-    
-    func createNewObject(with score: Int16) {
-        guard let context = self.context else { return }
-        let newScore = Score(context: context)
-        newScore.score = score
-        newScore.date = Date().format()
         
-        do {
-            try self.context?.save()
-        }
-        catch {
-            print(error)
-        }
-        
-        fetchScore()
-    }
-    
-    func updateObject(at index: Int) {
-        guard let scores = scores else { return }
-        scores[index].score = Int16(score)
-        scores[index].date = Date().format()
-        
-        do {
-            try self.context?.save()
-        }
-        catch {
-            print(error)
-        }
-        
-        fetchScore()
-    }
+    private var coreDataManager: CoreDataManager
     
     func newGame() {
-        createNewObject(with: Int16(score) )
+        coreDataManager.createScore(with: Int16(score))
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()

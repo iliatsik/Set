@@ -67,8 +67,13 @@ class TableViewCell: UITableViewCell {
 
     }
 
-    func configure(scoreTitle: String, dateTitle: String) {
+    func configure(scoreTitle: String, dateTitle: String, index: Int) {
         self.scoreTitle.text = scoreTitle
         self.dateTitle.text = dateTitle
+        
+        if index == 0 {
+            self.scoreTitle.textColor = .systemGreen
+            self.dateTitle.textColor = .systemGreen
+        }
     }
 }
