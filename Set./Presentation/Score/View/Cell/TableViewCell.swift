@@ -74,6 +74,9 @@ class TableViewCell: UITableViewCell {
         if index == 0 {
             self.scoreTitle.textColor = .systemGreen
             self.dateTitle.textColor = .systemGreen
+        } else {
+            self.scoreTitle.textColor = .gray
+            self.dateTitle.textColor = .gray
         }
     }
 }
