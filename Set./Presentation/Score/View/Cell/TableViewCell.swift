@@ -70,13 +70,5 @@ class TableViewCell: UITableViewCell {
     func configure(scoreTitle: String, dateTitle: String, index: Int) {
         self.scoreTitle.text = scoreTitle
         self.dateTitle.text = dateTitle
-        
-        if index == 0 {
-            self.scoreTitle.textColor = .systemGreen
-            self.dateTitle.textColor = .systemGreen
-        } else {
-            self.scoreTitle.textColor = .gray
-            self.dateTitle.textColor = .gray
-        }
     }
 }

@@ -16,9 +16,10 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
     private var constraints: [NSLayoutConstraint] = []
     private var collectionView : UICollectionView?
     private let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        
-    private let viewModel = SetViewModel(coreDataManager: CoreDataManager.shared )
-        
+    
+    private lazy var viewModel = SetViewModel(coreDataStack: coreDataStack)
+    var coreDataStack: CoreDataStack!
+    
     private var scoreController: UIButton {
         let button = UIButton()
         let boldConfig = UIImage.SymbolConfiguration(scale: .large)
@@ -136,7 +137,7 @@ extension SetViewController { //Private functions
     }
     
     @objc private func pushForScore(_ sender: UIButton) {
-        let scoreViewController = ScoreViewController(coreDataManager: CoreDataManager.shared, at: sender.tag, with: Int16(viewModel.score))
+        let scoreViewController = ScoreViewController(coreDataStack: coreDataStack)
         self.present(scoreViewController, animated: true, completion: nil)
     }
     

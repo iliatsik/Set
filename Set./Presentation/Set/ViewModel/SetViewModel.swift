@@ -19,8 +19,8 @@ struct CardInfo {
 
 class SetViewModel {
     
-    init(coreDataManager: CoreDataManager) {
-        self.coreDataManager = coreDataManager
+    init(coreDataStack: CoreDataStack) {
+        self.coreDataStack = coreDataStack
     }
     
     var set = SetModel()
@@ -30,10 +30,15 @@ class SetViewModel {
     var setChecker = false
     var selectedTwice = false
         
-    private var coreDataManager: CoreDataManager
+    private var coreDataStack: CoreDataStack
     
     func newGame() {
-        coreDataManager.createScore(with: Int16(score))
+//      coreDataManager.createScore(with: Int16(score))
+        let currentScore = Score(context: self.coreDataStack.managedContext)
+        currentScore.score = Int16(score)
+        currentScore.date = Date().format()
+        self.coreDataStack.saveContext()
+        
         score = 0
         set.availableCards.removeAll()
         set.currentCards.removeAll()

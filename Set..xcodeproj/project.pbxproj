@@ -17,13 +17,14 @@
 		DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA127BD7857001E4AC2 /* CardTheme.swift */; };
 		DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA327BD7866001E4AC2 /* SetModel.swift */; };
 		DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627DA627BE1F45001E4AC2 /* SetViewModel.swift */; };
-		DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */; };
 		DC627E0B27D607CE001E4AC2 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */; };
 		DC627E0E27D61EFB001E4AC2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */; };
 		DC627E2927DB536B001E4AC2 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2827DB536B001E4AC2 /* Date+String.swift */; };
-		DC627E2E27E0A1F5001E4AC2 /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */; };
-		DC627E2F27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */; };
-		DC627E3627E1CF18001E4AC2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */; };
+		DC77311B27E454570048E617 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC77311A27E454570048E617 /* CoreDataStack.swift */; };
+		DC77311D27E4547D0048E617 /* CoreDataFetchedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC77311C27E4547D0048E617 /* CoreDataFetchedResults.swift */; };
+		DC77311E27E45EB20048E617 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC627E0227D5F240001E4AC2 /* Data.xcdatamodeld */; };
+		DC77312127E45FEC0048E617 /* Score+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC77311F27E45FEC0048E617 /* Score+CoreDataClass.swift */; };
+		DC77312227E45FEC0048E617 /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC77312027E45FEC0048E617 /* Score+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +44,10 @@
 		DC627E0A27D607CE001E4AC2 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		DC627E0D27D61EFB001E4AC2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DC627E2827DB536B001E4AC2 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
-		DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		DC77311A27E454570048E617 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DC77311C27E4547D0048E617 /* CoreDataFetchedResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFetchedResults.swift; sourceTree = "<group>"; };
+		DC77311F27E45FEC0048E617 /* Score+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Score+CoreDataClass.swift"; path = "../../../../Score+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DC77312027E45FEC0048E617 /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Score+CoreDataProperties.swift"; path = "../../../../Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,7 +208,8 @@
 		DC627E3727E1CF1F001E4AC2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				DC627E3527E1CF18001E4AC2 /* CoreDataManager.swift */,
+				DC77311A27E454570048E617 /* CoreDataStack.swift */,
+				DC77311C27E4547D0048E617 /* CoreDataFetchedResults.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -214,8 +217,8 @@
 		DC627E3827E1CF26001E4AC2 /* Properties */ = {
 			isa = PBXGroup;
 			children = (
-				DC627E2C27E0A1F5001E4AC2 /* Score+CoreDataClass.swift */,
-				DC627E2D27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift */,
+				DC77311F27E45FEC0048E617 /* Score+CoreDataClass.swift */,
+				DC77312027E45FEC0048E617 /* Score+CoreDataProperties.swift */,
 			);
 			path = Properties;
 			sourceTree = "<group>";
@@ -290,14 +293,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC627E2F27E0A1F5001E4AC2 /* Score+CoreDataProperties.swift in Sources */,
+				DC77312227E45FEC0048E617 /* Score+CoreDataProperties.swift in Sources */,
 				DC5CCE5327BD33830030EDAC /* SetViewController.swift in Sources */,
 				DC5CCE4F27BD33830030EDAC /* AppDelegate.swift in Sources */,
-				DC627E3627E1CF18001E4AC2 /* CoreDataManager.swift in Sources */,
-				DC627E2E27E0A1F5001E4AC2 /* Score+CoreDataClass.swift in Sources */,
+				DC77311E27E45EB20048E617 /* Data.xcdatamodeld in Sources */,
+				DC77312127E45FEC0048E617 /* Score+CoreDataClass.swift in Sources */,
 				DC627DA027BD7850001E4AC2 /* Card.swift in Sources */,
 				DC627DA427BD7866001E4AC2 /* SetModel.swift in Sources */,
-				DC627E0427D5F240001E4AC2 /* Data.xcdatamodeld in Sources */,
+				DC77311B27E454570048E617 /* CoreDataStack.swift in Sources */,
 				DC627E0E27D61EFB001E4AC2 /* TableViewCell.swift in Sources */,
 				DC627DA227BD7857001E4AC2 /* CardTheme.swift in Sources */,
 				DC627DA727BE1F45001E4AC2 /* SetViewModel.swift in Sources */,
@@ -305,6 +308,7 @@
 				DC627E2927DB536B001E4AC2 /* Date+String.swift in Sources */,
 				DC5CCE6327BD444C0030EDAC /* CollectionViewCell.swift in Sources */,
 				DC5CCE5127BD33830030EDAC /* SceneDelegate.swift in Sources */,
+				DC77311D27E4547D0048E617 /* CoreDataFetchedResults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
