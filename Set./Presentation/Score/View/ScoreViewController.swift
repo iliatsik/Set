@@ -19,34 +19,8 @@ class ScoreViewController: UIViewController {
     }
     
     var coreDataStack: CoreDataStack
-            
-    lazy var fetchedResultsController: NSFetchedResultsController<Score> = {
-
-        let fetchRequest: NSFetchRequest<Score> = Score.fetchRequest()
-
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: coreDataStack.managedContext,
-            sectionNameKeyPath: #keyPath(Score.score),
-            cacheName: "Score")
-
-        fetchedResultsController.delegate = self
-
-        return fetchedResultsController
-    }()
+    lazy var scoreRepository = ScoreRepository(coreDataStack: coreDataStack, delegate: self, controller: self)
     
-    
-    let dateSort = NSSortDescriptor(key: #keyPath(Score.date), ascending: false)
-    lazy var sortDescriptors = [dateSort]
-    
-    lazy var coreDataFetchedResults = CoreDataFetchedResults(ofType: Score.self,
-                                                             entityName: "Score",
-                                                             sortDescriptors: sortDescriptors,
-                                                             managedContext: coreDataStack.managedContext,
-                                                             delegate: self,
-                                                             sectionNameKeyPath: #keyPath(Score.score),
-                                                             cacheName: "Score")
-
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,32 +30,29 @@ class ScoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scoreRepository.coreDataFetchedResults.performFetch()
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
-        coreDataFetchedResults.performFetch()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        coreDataManager.updateScore(at: index, with: score)
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
+    
 }
 
 //MARK: - Table View
 extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return coreDataFetchedResults.controller.sections?.count ?? 0
+        return scoreRepository.coreDataFetchedResults.controller.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionInfo = coreDataFetchedResults.controller.sections?[section] else { return 0 }
+        let sectionInfo = scoreRepository.coreDataFetchedResults.controller.sections![section] 
+        
         return sectionInfo.numberOfObjects
     }
     
@@ -89,9 +60,8 @@ extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TableViewCell.self),
                                                        for: indexPath) as? TableViewCell else { return UITableViewCell.init() }
         
-        let currentScore = coreDataFetchedResults.controller.object(at: indexPath)
-        guard let date = currentScore.date else { return UITableViewCell.init() }
-
+        let currentScore = scoreRepository.coreDataFetchedResults.controller.object(at: indexPath)
+        guard let date = currentScore.date else { return UITableViewCell.init()}
         cell.configure(scoreTitle: "Score: \(currentScore.score)",
                        dateTitle: date,
                        index: indexPath.row)
@@ -100,8 +70,8 @@ extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
-            let score = self.coreDataFetchedResults.controller.object(at: indexPath) 
-            self.coreDataFetchedResults.managedContext.delete(score)
+            let score = self.scoreRepository.coreDataFetchedResults.controller.object(at: indexPath)
+            self.scoreRepository.coreDataFetchedResults.managedContext.delete(score)
         })
         deleteAction.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -128,7 +98,7 @@ extension ScoreViewController: NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
             let cell = tableView.cellForRow(at: indexPath!) as! TableViewCell
-            let score = coreDataFetchedResults.controller.object(at: indexPath!)
+            let score = scoreRepository.coreDataFetchedResults.controller.object(at: indexPath!)
             guard let indexPath = indexPath else { return }
             cell.configure(scoreTitle: "\(score.score)", dateTitle: "\(String(describing: score.date))", index: indexPath.row)
         case .move:
