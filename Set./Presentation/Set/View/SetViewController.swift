@@ -41,54 +41,56 @@ final class SetViewController: UIViewController, CollectionViewCellDelegate {
         return label
     }()
     
-    private var addThreeCardTitle: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .gray
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 12
-        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.setTitle("Add Cards", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+    private lazy var addThreeCardTitle: UIButton = {
+        var button = UIButton()
+        
+        button = configureButton(backgroundColor: .gray,
+                                 cornerRadius: 12,
+                                 fontSize: 25,
+                                 title: "Add Cards",
+                                 titleColor: .black,
+                                 masksToBounds: true)
         button.addTarget(self, action: #selector(addThreeCard), for: .touchUpInside)
         return button
     }()
     
-    private var newGameTitle: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .gray
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 12
-        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.setTitle("New Game", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+    private lazy var newGameTitle: UIButton = {
+        var button = UIButton()
+        
+        button = configureButton(backgroundColor: .gray,
+                                 cornerRadius: 12,
+                                 fontSize: 25,
+                                 title: "New Game",
+                                 titleColor: .black,
+                                 masksToBounds: true)
         button.addTarget(self, action: #selector(newGame), for: .touchUpInside)
         return button
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        var stackView = UIStackView()
+        
+        stackView = configureStackView(axis: .horizontal,
+                                       spacing: 20,
+                                       alignemnt: .fill,
+                                       distribution: .fillEqually)
         return stackView
     }()
     
     private lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        var stackView = UIStackView()
+        
+        stackView = configureStackView(axis: .horizontal,
+                                       spacing: 20,
+                                       alignemnt: .fill,
+                                       distribution: .fillEqually)
         return stackView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        viewModel.newGame()
+        viewModel.onLoad()
         configureStackViews()
         configureCollectionView()
     }
@@ -238,6 +240,28 @@ extension SetViewController { //Private functions
                     self.collectionView?.backgroundColor = .black
                 }, completion: nil)
         }
+    }
+    
+    private func configureButton(backgroundColor: UIColor, cornerRadius: CGFloat, fontSize: CGFloat, title: String, titleColor: UIColor, masksToBounds: Bool) -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = backgroundColor
+        button.layer.cornerRadius = cornerRadius
+        button.layer.masksToBounds = masksToBounds
+        button.titleLabel?.font = .boldSystemFont(ofSize: fontSize)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        return button
+    }
+    
+    private func configureStackView(axis: NSLayoutConstraint.Axis, spacing: CGFloat, alignemnt: UIStackView.Alignment, distribution: UIStackView.Distribution) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.spacing = spacing
+        stackView.alignment = alignemnt
+        stackView.distribution = distribution
+        return stackView
+        
     }
 }
 

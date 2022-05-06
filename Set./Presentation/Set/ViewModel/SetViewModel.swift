@@ -31,6 +31,8 @@ final class SetViewModel {
         
     private var coreDataStack: CoreDataStack
     
+    func onLoad() { newGame() }
+    
     func newGame() {
         let currentScore = Score(context: self.coreDataStack.managedContext)
         currentScore.score = Int16(score)
