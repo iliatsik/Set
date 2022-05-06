@@ -7,17 +7,16 @@
 
 import Foundation
 import Combine
-import UIKit
 import CoreData
 
 struct CardInfo {
-    var index = Int()
-    var title = NSAttributedString()
-    var isHidden = Bool()
-    var isEnabled = Bool()
+    var index: Int?
+    var title: NSAttributedString?
+    var isHidden: Bool?
+    var isEnabled: Bool?
 }
 
-class SetViewModel {
+final class SetViewModel {
     
     init(coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
@@ -33,10 +32,9 @@ class SetViewModel {
     private var coreDataStack: CoreDataStack
     
     func newGame() {
-//      coreDataManager.createScore(with: Int16(score))
         let currentScore = Score(context: self.coreDataStack.managedContext)
         currentScore.score = Int16(score)
-        currentScore.date = Date().format()
+        currentScore.date = Date().shortDateFormatter()
         self.coreDataStack.saveContext()
         
         score = 0

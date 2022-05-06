@@ -8,29 +8,32 @@
 import UIKit
 import CoreData
 
-class ScoreViewController: UIViewController {
-    init(coreDataStack: CoreDataStack) {
-        self.coreDataStack = coreDataStack
-        super.init(nibName: nil, bundle: nil)
-    }
+final class ScoreViewController: UIViewController {
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    var coreDataStack: CoreDataStack
-    lazy var scoreRepository = ScoreRepository(coreDataStack: coreDataStack, delegate: self, controller: self)
-    
+//    init(viewModel: ScoreViewModel) {
+////        super.init(nibName: nil, bundle: nil)
+//        self.viewModel = ScoreViewModel(scoreRepository: ScoreRepository(delegate: self))
+//        super.init(nibName: nil, bundle: nil)
+//
+////        viewModel = ScoreViewModel(scoreRepository: ScoreRepository(delegate: self))
+//    }
+//        
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
+    private lazy var viewModel = ScoreViewModel(scoreRepository: ScoreRepository(delegate: self))
+
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: String(describing: TableViewCell.self))
+        tableView.register(ScoreTableViewCell.self, forCellReuseIdentifier: String(describing: ScoreTableViewCell.self))
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scoreRepository.coreDataFetchedResults.performFetch()
+        viewModel.performFetch()
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -47,20 +50,18 @@ class ScoreViewController: UIViewController {
 extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return scoreRepository.coreDataFetchedResults.controller.sections?.count ?? 0
+        viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = scoreRepository.coreDataFetchedResults.controller.sections![section] 
-        
-        return sectionInfo.numberOfObjects
+        viewModel.numberOfRows(at: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TableViewCell.self),
-                                                       for: indexPath) as? TableViewCell else { return UITableViewCell.init() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ScoreTableViewCell.self),
+                                                       for: indexPath) as? ScoreTableViewCell else { return UITableViewCell.init() }
         
-        let currentScore = scoreRepository.coreDataFetchedResults.controller.object(at: indexPath)
+        let currentScore = viewModel.score(at: indexPath)
         guard let date = currentScore.date else { return UITableViewCell.init()}
         cell.configure(scoreTitle: "Score: \(currentScore.score)",
                        dateTitle: date,
@@ -70,8 +71,7 @@ extension ScoreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
-            let score = self.scoreRepository.coreDataFetchedResults.controller.object(at: indexPath)
-            self.scoreRepository.coreDataFetchedResults.managedContext.delete(score)
+            self.viewModel.deleteScore(at: indexPath)
         })
         deleteAction.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -97,9 +97,9 @@ extension ScoreViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
         case .update:
-            let cell = tableView.cellForRow(at: indexPath!) as! TableViewCell
-            let score = scoreRepository.coreDataFetchedResults.controller.object(at: indexPath!)
             guard let indexPath = indexPath else { return }
+            let cell = tableView.cellForRow(at: indexPath) as! ScoreTableViewCell
+            let score = viewModel.score(at: indexPath)
             cell.configure(scoreTitle: "\(score.score)", dateTitle: "\(String(describing: score.date))", index: indexPath.row)
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .automatic)

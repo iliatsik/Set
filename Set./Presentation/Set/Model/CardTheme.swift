@@ -7,27 +7,39 @@
 
 import UIKit
 
-class CardTheme {
+final class CardTheme {
+    
+    struct Symbol {
+        static let circle = "●"
+        static let square = "◼︎"
+        static let triangle = "▲"
+    }
+    
+    struct Color {
+        static let red = UIColor(named: "red")
+        static let green = UIColor(named: "green")
+        static let purple = UIColor(named: "purple")
+    }
     
     private static func setSymbol(withCard: Card) -> String {
         switch withCard.cardSymbol {
         case .circle:
-            return "●"
+            return Symbol.circle
         case .square:
-            return "◼︎"
+            return Symbol.square
         case .triangle:
-            return "▲"
+            return Symbol.triangle
         }
     }
     
     private static func setColor(withCard: Card) -> UIColor {
         switch withCard.cardColor {
         case .red:
-            return UIColor(named: "red") ?? .red
+            return Color.red ?? .red
         case .green:
-            return UIColor(named: "green") ?? .green
+            return Color.green ?? .green
         case .purple:
-            return UIColor(named: "purple") ?? .purple
+            return Color.purple ?? .purple
         }
     }
     

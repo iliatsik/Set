@@ -12,26 +12,27 @@ import Combine
 
 class ScoreRepository {
         
-    init(coreDataStack: CoreDataStack, delegate: NSFetchedResultsControllerDelegate, controller: ScoreViewController) {
-        self.coreDataStack = coreDataStack
+    init(delegate: NSFetchedResultsControllerDelegate) {
         self.delegate = delegate
-        self.controller = controller
     }
     
-    var coreDataStack: CoreDataStack
-    var delegate: NSFetchedResultsControllerDelegate
-    var controller: ScoreViewController
+    init(coreDataStack: CoreDataStack) {
+        self.coreDataStack = coreDataStack
+    }
+    
+    var coreDataStack: CoreDataStack?
+    var delegate: NSFetchedResultsControllerDelegate?
     
     var subscriber = Set<AnyCancellable>()
     @Published var score: [Score] = []
     
     lazy var fetchedResultsController: NSFetchedResultsController<Score> = {
-        
+
         let fetchRequest: NSFetchRequest<Score> = Score.fetchRequest()
 
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: coreDataStack.managedContext,
+            managedObjectContext: coreDataStack!.managedContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         
@@ -47,8 +48,8 @@ class ScoreRepository {
     lazy var coreDataFetchedResults = CoreDataFetchedResults(ofType: Score.self,
                                                              entityName: "Score",
                                                              sortDescriptors: sortDescriptors,
-                                                             managedContext: coreDataStack.managedContext,
-                                                             delegate: controller,
+                                                             managedContext: coreDataStack!.managedContext,
+                                                             delegate: ScoreViewController(),
                                                              sectionNameKeyPath: nil,
                                                              cacheName: nil)
   

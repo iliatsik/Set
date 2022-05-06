@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SetModel {
+final class SetModel {
     var currentCards: [Card] = []
     var availableCards: [Card] = []
     var selectedCards: [Card] = []

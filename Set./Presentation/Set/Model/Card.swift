@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Card: Equatable {
+final class Card: Equatable {
    
     init(cardSymbol: Symbol, cardColor: Color, cardNumber: Number, cardShading: Shading) {
         self.cardColor = cardColor

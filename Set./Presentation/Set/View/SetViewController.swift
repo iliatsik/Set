@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import CoreData
 
-class SetViewController: UIViewController, CollectionViewCellDelegate {
+final class SetViewController: UIViewController, CollectionViewCellDelegate {
     
     private var subscriber = Set<AnyCancellable>()
     
@@ -17,8 +17,7 @@ class SetViewController: UIViewController, CollectionViewCellDelegate {
     private var collectionView : UICollectionView?
     private let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
-    private lazy var viewModel = SetViewModel(coreDataStack: coreDataStack)
-    var coreDataStack: CoreDataStack!
+    private lazy var viewModel = SetViewModel(coreDataStack: CoreDataStack(modelName: "Data"))
     
     private var scoreController: UIButton {
         let button = UIButton()
@@ -137,7 +136,7 @@ extension SetViewController { //Private functions
     }
     
     @objc private func pushForScore(_ sender: UIButton) {
-        let scoreViewController = ScoreViewController(coreDataStack: coreDataStack)
+        let scoreViewController = ScoreViewController()
         self.present(scoreViewController, animated: true, completion: nil)
     }
     

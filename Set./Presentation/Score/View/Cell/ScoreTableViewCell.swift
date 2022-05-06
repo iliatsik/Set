@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+final class ScoreTableViewCell: UITableViewCell {
 
     private var constraintsForTableCell: [NSLayoutConstraint] = []
 
